@@ -1,3 +1,3 @@
-const API = require("./API-auth.json");
+const API = require("./API-auth");
 
 console.log(API);
