@@ -1,0 +1,19 @@
+{
+  "name": "recipeapp",
+  "version": "1.0.0",
+  "description": "App developed for my software engineering class at Siena College",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MSPigl/RecipeApp.git"
+  },
+  "author": "Matthew Pigliavento",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MSPigl/RecipeApp/issues"
+  },
+  "homepage": "https://github.com/MSPigl/RecipeApp#readme"
+}
