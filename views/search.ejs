@@ -1,0 +1,87 @@
+<% include ./partials/header %>
+    <div class="ui container else">
+        <div class="ui centered grid">
+            <div class="row">
+                <div class="eight wide column">
+                        <form id="searchForm" class="ui form" action="/show" method="POST">
+                            <div class="field">
+                                <label for="ingredientInput">Ingredient</label>
+                                <input id="ingredientInput" type="text" name="ingredientInput" placeholder="chicken, salt, sugar, etc...">
+                            </div>
+                            <div id="addIngredient" class="ui button">Add Ingredient</div>
+
+                            <div class="ui selection dropdown">
+                                <input type="hidden" name="diet">
+                                <i class="dropdown icon"></i>
+                                <div class="default text">Diet</div>
+                                <div class="menu">
+                                    <div class="item" data-value="none">None</div>
+                                    <div class="item" data-value="balanced">Balanced</div>
+                                    <div class="item" data-value="high-protein">High-Protein</div>
+                                    <div class="item" data-value="high-fiber">High-Fiber</div>
+                                    <div class="item" data-value="low-fat">Low-Fat</div>
+                                    <div class="item" data-value="low-carb">Low-Carb</div>
+                                    <div class="item" data-value="low-sodium">Low-Sodium</div>
+                                </div>
+                            </div>
+                    
+                            <input id="submitButton" type="submit" class="ui button">
+                        </form>
+                </div>
+
+                <div class="eight wide column">
+                    <h2>Ingredients list</h2>
+                    <div id="ingredientListContainer"><ul id="ingredientList"></ul></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        let ingredientButton = document.querySelector("#addIngredient");
+        ingredientButton.addEventListener("click", addIngredient);
+
+        let form = document.querySelector("#searchForm");
+        searchForm.addEventListener("keydown", (event) => {
+            if (event.key === "Enter")
+            {
+                event.preventDefault();
+
+                let ingredientInput = document.querySelector("#ingredientInput");
+                ingredientInput.value = ingredientInput.value.replace(/\s/g, '');
+
+                addIngredient();
+            }
+        });
+
+        let submitButton = document.querySelector("#submitButton");
+        submitButton.addEventListener("click", (event) => {
+            console.log(buildQueryString());
+        });
+
+        function addIngredient()
+        {
+            let ingredientInput = document.querySelector("#ingredientInput");
+            let ingredientList = document.querySelector("#ingredientList");
+            let newIngredient = document.createElement("li");
+            
+            newIngredient.innerText = ingredientInput.value;
+            newIngredient.classList.add("ingredient");
+
+            ingredientInput.value = "";
+            ingredientList.appendChild(newIngredient);
+        }
+
+        function buildQueryString(string)
+        {
+            let ingredients = document.querySelectorAll(".ingredient");
+            let ingredientArray = [];
+            
+            ingredients.forEach(ingredient => {
+                ingredientArray.push(ingredient.innerText);
+            });
+
+            return ingredientArray.toString();
+        }
+    </script>
+<% include ./partials/footer %>

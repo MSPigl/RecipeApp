@@ -1,0 +1,20 @@
+#showHeader {
+    margin-top: 45px;
+}
+
+#ingredientListContainer {
+    height: 150px;
+}
+
+#ingredientList {
+    height: 100%;
+    overflow: scroll;
+}
+
+.ui.huge.header {
+    text-align: center;
+}
+
+.else {
+    margin-top: 50px;
+}

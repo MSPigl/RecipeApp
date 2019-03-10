@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/MSPigl/RecipeApp#readme",
   "dependencies": {
-    "axios": "^0.18.0"
+    "axios": "^0.18.0",
+    "ejs": "^2.6.1",
+    "express": "^4.16.4"
   }
 }
