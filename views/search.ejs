@@ -9,20 +9,53 @@
                                 <input id="ingredientInput" type="text" name="ingredientInput" placeholder="chicken, salt, sugar, etc...">
                             </div>
                             <div id="addIngredient" class="ui button">Add Ingredient</div>
-
-                            <div class="ui selection dropdown">
-                                <input type="hidden" name="diet">
-                                <i class="dropdown icon"></i>
-                                <div class="default text">Diet</div>
-                                <div class="menu">
-                                    <div class="item" data-value="none">None</div>
-                                    <div class="item" data-value="balanced">Balanced</div>
-                                    <div class="item" data-value="high-protein">High-Protein</div>
-                                    <div class="item" data-value="high-fiber">High-Fiber</div>
-                                    <div class="item" data-value="low-fat">Low-Fat</div>
-                                    <div class="item" data-value="low-carb">Low-Carb</div>
-                                    <div class="item" data-value="low-sodium">Low-Sodium</div>
+                            
+                            <div class="field">
+                                <div class="ui selection dropdown">
+                                    <input type="hidden" name="diet">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Diet</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="none">None</div>
+                                        <div class="item" data-value="balanced">Balanced</div>
+                                        <div class="item" data-value="high-protein">High-Protein</div>
+                                        <div class="item" data-value="high-fiber">High-Fiber</div>
+                                        <div class="item" data-value="low-fat">Low-Fat</div>
+                                        <div class="item" data-value="low-carb">Low-Carb</div>
+                                        <div class="item" data-value="low-sodium">Low-Sodium</div>
+                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="field">
+                                <select multiple="" class="ui dropdown">
+                                    <option value="">Select health labels</option>
+                                    <option value="celery-free">Celery-free</option>
+                                    <option value="crustacean-free">Crustacean-free</option>
+                                    <option value="dairy-free">Dairy-free</option>
+                                    <option value="egg-free">Egg-free</option>
+                                    <option value="fish-free">Fish-free</option>
+                                    <option value="Gluten-free">Gluten-free</option>
+                                    <option value="kidney-friendly">Kidney friendly</option>
+                                    <option value="kosher">Kosher</option>
+                                    <option value="low-potassium">Low potassium</option>
+                                    <option value="mustard-free">Mustard-free</option>
+                                    <option value="No-oil-added">No oil added</option>
+                                    <option value="low-sugar">Sugar-free</option>
+                                    <option value="sugar-conscious">Sugar-conscious</option>
+                                    <option value="paleo">Paleo</option>
+                                    <option value="peanut-free">Peanut-free</option>
+                                    <option value="pescatarian">Pescatarian</option>
+                                    <option value="pork-free">Pork-free</option>
+                                    <option value="red-meat-free">red-meat-free</option>
+                                    <option value="sesame-free">Sesame-free</option>
+                                    <option value="shellfish-free">Shellfish-free</option>
+                                    <option value="soy-free">Soy-free</option>
+                                    <option value="tree-nut-free">Tree nut-free</option>
+                                    <option value="vegan">Vegan</option>
+                                    <option value="vegetarian">Vegetarian</option>
+                                    <option value="wheat-free">Wheat-free</option>
+                                </select>
                             </div>
                     
                             <input id="submitButton" type="submit" class="ui button">
@@ -38,6 +71,8 @@
     </div>
 
     <script type="text/javascript">
+        $(".ui.dropdown").dropdown();
+
         let ingredientButton = document.querySelector("#addIngredient");
         ingredientButton.addEventListener("click", addIngredient);
 
