@@ -11,6 +11,10 @@
     overflow: scroll;
 }
 
+#addIngredient {
+    margin-bottom: 20px;
+}
+
 .ui.huge.header {
     text-align: center;
 }

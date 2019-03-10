@@ -6,13 +6,13 @@
                         <form id="searchForm" class="ui form" action="/show" method="POST">
                             <div class="field">
                                 <label for="ingredientInput">Ingredient</label>
-                                <input id="ingredientInput" type="text" name="ingredientInput" placeholder="chicken, salt, sugar, etc...">
+                                <input id="ingredientInput" type="text" name="fields[ingredientInput]" placeholder="chicken, salt, sugar, etc..." required>
                             </div>
                             <div id="addIngredient" class="ui button">Add Ingredient</div>
                             
                             <div class="field">
                                 <div class="ui selection dropdown">
-                                    <input type="hidden" name="diet">
+                                    <input type="hidden" name="fields[diet]">
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Diet</div>
                                     <div class="menu">
@@ -28,17 +28,19 @@
                             </div>
 
                             <div class="field">
-                                <select multiple="" class="ui dropdown">
+                                <select multiple="" name="fields[health]" class="ui dropdown">
                                     <option value="">Select health labels</option>
+                                    <option value="alcohol-free">Alcohol-free</option>
                                     <option value="celery-free">Celery-free</option>
                                     <option value="crustacean-free">Crustacean-free</option>
                                     <option value="dairy-free">Dairy-free</option>
                                     <option value="egg-free">Egg-free</option>
                                     <option value="fish-free">Fish-free</option>
-                                    <option value="Gluten-free">Gluten-free</option>
+                                    <option value="gluten-free">Gluten-free</option>
                                     <option value="kidney-friendly">Kidney friendly</option>
                                     <option value="kosher">Kosher</option>
                                     <option value="low-potassium">Low potassium</option>
+                                    <option value="lupine-free">Lupine-free</option>
                                     <option value="mustard-free">Mustard-free</option>
                                     <option value="No-oil-added">No oil added</option>
                                     <option value="low-sugar">Sugar-free</option>
@@ -47,7 +49,7 @@
                                     <option value="peanut-free">Peanut-free</option>
                                     <option value="pescatarian">Pescatarian</option>
                                     <option value="pork-free">Pork-free</option>
-                                    <option value="red-meat-free">red-meat-free</option>
+                                    <option value="red-meat-free">Red-meat-free</option>
                                     <option value="sesame-free">Sesame-free</option>
                                     <option value="shellfish-free">Shellfish-free</option>
                                     <option value="soy-free">Soy-free</option>
@@ -57,6 +59,30 @@
                                     <option value="wheat-free">Wheat-free</option>
                                 </select>
                             </div>
+
+                            <div class="inline fields">
+                                <div class="field">
+                                    <label for="minCal">Min kcals:</label>
+                                    <input id="minCal" type="number" name="fields[minCal]">
+                                </div>
+                                
+                                <div class="field">
+                                    <label for="maxCal">Max kcals:</label>
+                                    <input id="maxCal" type="number" name="fields[maxCal]">
+                                </div>
+                            </div>
+
+                            <div class="inline fields">
+                                    <div class="field">
+                                        <label for="minTime">Min time:</label>
+                                        <input id="minTime" type="number" name="fields[minTime]">
+                                    </div>
+                                    
+                                    <div class="field">
+                                        <label for="maxTime">Max time:</label>
+                                        <input id="maxTime" type="number" name="fields[maxTime]">
+                                    </div>
+                                </div>
                     
                             <input id="submitButton" type="submit" class="ui button">
                         </form>
@@ -80,8 +106,6 @@
         searchForm.addEventListener("keydown", (event) => {
             if (event.key === "Enter")
             {
-                event.preventDefault();
-
                 let ingredientInput = document.querySelector("#ingredientInput");
                 ingredientInput.value = ingredientInput.value.replace(/\s/g, '');
 
@@ -91,7 +115,8 @@
 
         let submitButton = document.querySelector("#submitButton");
         submitButton.addEventListener("click", (event) => {
-            console.log(buildQueryString());
+
+            document.querySelector("#ingredientInput").value = buildQueryString();
         });
 
         function addIngredient()
@@ -116,7 +141,7 @@
                 ingredientArray.push(ingredient.innerText);
             });
 
-            return ingredientArray.toString();
+            return ingredientArray;
         }
     </script>
 <% include ./partials/footer %>
