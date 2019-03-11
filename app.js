@@ -28,6 +28,11 @@ app.get("/show", (req, res) => {
     res.render("show");
 });
 
+// about route
+app.get("/about", (req, res) => {
+    res.render("about");
+});
+
 // show POST routeG
 app.post("/show", (req, res) => {
     let data = parseBody(req.body.fields);
