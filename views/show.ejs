@@ -1,99 +1,49 @@
 <% include ./partials/header %>
     <div id="showHeader" class="ui main text container segment">
-        <div class="ui huge header">Recipes</div>
+        <div class="ui huge header">Recipes (<%= count %> results)</div>
     </div>
 
     <div class="ui container">
         <div class="ui centered grid">
-            <div class="row">
-                <div class="sixteen wide mobile eight wide tablet four wide computer column">
-                    <div class="ui fluid card">
-                        <div class="image">
-                            <img src="https://content.thriveglobal.com/wp-content/uploads/2018/11/vikumatseeepill.jpg">
-                        </div>
-
-                        <div class="content">
-                            <div class="header">
-                                Recipe Title
+            <!--TODO: Add pagination to replace this hardcoded range (use from...to)-->
+            <% for (let i = 0; i < 4; i++) {                %>
+                <div class="row">
+            <%  for (let j = 0; j < 4; j++) { %>
+            <%      let recipe = recipes[j].recipe;                %>
+                    <div class="sixteen wide mobile eight wide tablet four wide computer column">
+                        <div class="ui fluid card">
+                            <div class="image">
+                                <img src="<%= recipe.image %>">
                             </div>
 
-                            <div class="meta">
-                                Some meta information
-                            </div>
+                            <div class="content">
+                                <div class="header">
+                                    <%= recipe.label %>
+                                </div>
 
-                            <div class="description">
-                                A description for this card
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="sixteen wide mobile eight wide tablet four wide computer column">
-                    <div class="ui fluid card">
-                        <div class="image">
-                            <img src="https://content.thriveglobal.com/wp-content/uploads/2018/11/vikumatseeepill.jpg">
-                        </div>
+                                <div class="meta">
+                                    from <%= recipe.source %>
+                                </div>
 
-                        <div class="content">
-                            <div class="header">
-                                Recipe Title
-                            </div>
+                                <div class="description">
+                                    <% if (recipe.hasOwnProperty("dietLabels")) { %>
+                                    <%  recipe.dietLabels.forEach(label => {      %>
+                                    <%=     label + ", "                          %>
+                                    <%  });                                       %>
+                                    <% }                                          %>
 
-                            <div class="meta">
-                                Some meta information
-                            </div>
-
-                            <div class="description">
-                                A description for this card
+                                    <% if (recipe.hasOwnProperty("healthLabels")) { %>
+                                    <%  recipe.healthLabels.forEach(label => {      %>
+                                    <%=     label + ", "                            %>
+                                    <%  });                                         %>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
                     </div>
+            <% } %>
                 </div>
-            
-                <div class="sixteen wide mobile eight wide tablet four wide computer column">
-                    <div class="ui fluid card">
-                        <div class="image">
-                            <img src="https://content.thriveglobal.com/wp-content/uploads/2018/11/vikumatseeepill.jpg">
-                        </div>
-
-                        <div class="content">
-                            <div class="header">
-                                Recipe Title
-                            </div>
-
-                            <div class="meta">
-                                Some meta information
-                            </div>
-
-                            <div class="description">
-                                A description for this card
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="sixteen wide mobile eight wide tablet four wide computer column">
-                    <div class="ui fluid card">
-                        <div class="image">
-                            <img src="https://content.thriveglobal.com/wp-content/uploads/2018/11/vikumatseeepill.jpg">
-                        </div>
-
-                        <div class="content">
-                            <div class="header">
-                                Recipe Title
-                            </div>
-
-                            <div class="meta">
-                                Some meta information
-                            </div>
-
-                            <div class="description">
-                                A description for this card
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+           <% } %>
         </div>
     </div>
 <% include ./partials/footer %>

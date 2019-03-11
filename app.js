@@ -20,7 +20,7 @@ app.get("/", (req, res) => {
 
 // search route
 app.get("/search", (req, res) => {
-    res.render("search");
+    res.render("search", {"error": false});
 });
 
 // show route
@@ -28,33 +28,30 @@ app.get("/show", (req, res) => {
     res.render("show");
 });
 
-// show POST route
+// show POST routeG
 app.post("/show", (req, res) => {
     let data = parseBody(req.body.fields);
     data.q = data.q.split(",");
     
     let url = `https://api.edamam.com/search?${querystring.stringify(data)}`;
-    console.log(url);
 
     request.get(url, (error, response, body) => {
-        if (error)
+        if (error || response.statusCode !== 200)
         {
-            return res.redirect("/");
+            return res.render("search", {"error": true});
         }
-        console.log(response.statusCode);
-        res.redirect("/show");
+        else
+        {
+            let data = JSON.parse(response.body);
+            res.render("show", {"count": data.count,"recipes": data.hits});
+        }
     });
-
-    //console.log(url);
-
-    //res.redirect("/show");
 });
 
 app.listen(port, () => console.log("Server started"));
 
 function parseQueryText(queryText)
 {
-    console.log(queryText);
     let query = "";
     let ingredients = queryText.split(",");
 
@@ -78,7 +75,6 @@ function parseHealth(healthLabels)
 
 function parseBody(body)
 {
-    console.log(body);
     // parse body
     let queryText = body.ingredientInput;
 
