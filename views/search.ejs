@@ -15,10 +15,11 @@
                 <div class="eight wide column">
                         <form id="searchForm" class="ui form" action="/show" method="POST">
                             <div class="field">
-                                <label for="ingredientInput">Ingredient</label>
+                                <label for="ingredientInput">Ingredients</label>
                                 <input id="ingredientInput" type="text" name="fields[ingredientInput]" placeholder="chicken, salt, sugar, etc..." required>
                             </div>
-                            <div id="addIngredient" class="ui button">Add Ingredient</div>
+                            
+                            <div id="addIngredient" class="positive ui fluid button">Add Ingredient</div>
                             
                             <div class="field">
                                 <div class="ui selection dropdown">
@@ -70,7 +71,7 @@
                                 </select>
                             </div>
 
-                            <div class="inline fields">
+                            <div class="equal width fields">
                                 <div class="field">
                                     <label for="minCal">Min kcals:</label>
                                     <input id="minCal" type="number" name="fields[minCal]">
@@ -82,7 +83,7 @@
                                 </div>
                             </div>
 
-                            <div class="inline fields">
+                            <div class="equal width fields">
                                     <div class="field">
                                         <label for="minTime">Min time:</label>
                                         <input id="minTime" type="number" name="fields[minTime]">
@@ -94,7 +95,7 @@
                                     </div>
                                 </div>
                     
-                            <input id="submitButton" type="submit" class="ui button">
+                            <input id="submitButton" type="submit" class="ui blue fluid button">
                         </form>
                 </div>
 
@@ -107,6 +108,7 @@
     </div>
 
     <script type="text/javascript">
+        // enable message closing
         if ($('.message .close').length)
         {
             $('.message .close')
@@ -116,51 +118,46 @@
                     .transition('fade');
             });
         }
+
+        // enable dropdown
         $(".ui.dropdown").dropdown();
 
-        let ingredientButton = document.querySelector("#addIngredient");
-        ingredientButton.addEventListener("click", addIngredient);
+        let ingredientButton = $("#addIngredient");
+        ingredientButton.click(addIngredient);
 
-        let form = document.querySelector("#searchForm");
-        searchForm.addEventListener("keydown", (event) => {
-            if (event.key === "Enter")
-            {
-                let ingredientInput = document.querySelector("#ingredientInput");
-                ingredientInput.value = ingredientInput.value.replace(/\s/g, '');
-
-                addIngredient();
-            }
+        let submitButton = $("#submitButton");
+        submitButton.click(() => {
+            $("#ingredientInput").val(buildQueryString());
         });
 
-        let submitButton = document.querySelector("#submitButton");
-        submitButton.addEventListener("click", (event) => {
-
-            document.querySelector("#ingredientInput").value = buildQueryString();
-        });
-
+        /**
+         * Add ingredient to list
+         */
         function addIngredient()
         {
-            let ingredientInput = document.querySelector("#ingredientInput");
-            let ingredientList = document.querySelector("#ingredientList");
-            let newIngredient = document.createElement("li");
+            let ingredientInput = $("#ingredientInput");
             
-            newIngredient.innerText = ingredientInput.value;
-            newIngredient.classList.add("ingredient");
+            if (ingredientInput.val())
+            {
+                let ingredientList = $("#ingredientList");
+                let newIngredient = $(document.createElement("li"));
+                
+                newIngredient.text(ingredientInput.val());
+                newIngredient.addClass("ingredient");
 
-            ingredientInput.value = "";
-            ingredientList.appendChild(newIngredient);
+                ingredientInput.val("");
+                ingredientList.append(newIngredient);
+            }
         }
 
+        /**
+         * Set ingredient input value equal to the list of ingredients
+         */
         function buildQueryString(string)
         {
-            let ingredients = document.querySelectorAll(".ingredient");
-            let ingredientArray = [];
-            
-            ingredients.forEach(ingredient => {
-                ingredientArray.push(ingredient.innerText);
-            });
+            let ingredients = $(".ingredient").text();
 
-            return ingredientArray;
+            return ingredients;
         }
     </script>
 <% include ./partials/footer %>
