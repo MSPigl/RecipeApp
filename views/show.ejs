@@ -11,6 +11,7 @@
             <%  for (let j = 0; j < 4; j++) { %>
             <%      let recipe = recipes[j].recipe;                %>
                     <div class="sixteen wide mobile eight wide tablet four wide computer column">
+                        <% let recipeId = recipe.uri.split("#")[1] %>
                         <div class="ui fluid card">
                             <div class="image">
                                 <img src="<%= recipe.image %>">
@@ -18,11 +19,13 @@
 
                             <div class="content">
                                 <div class="header">
-                                    <%= recipe.label %>
+                                    <a href="/view/<%= recipeId %>" target="_blank">
+                                        <%= recipe.label %>
+                                    </a>
                                 </div>
 
                                 <div class="meta">
-                                    from <%= recipe.source %>
+                                    from <a href="<%= recipe.url %>" target="_blank"><%= recipe.source %></a>
                                 </div>
 
                                 <div class="description">

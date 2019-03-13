@@ -9,6 +9,9 @@ const bodyParser = require("body-parser");
 const app = express();
 const port = 3000;
 
+// stores current selection
+let currentSelection = {};
+
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -33,7 +36,23 @@ app.get("/about", (req, res) => {
     res.render("about");
 });
 
-// show POST routeG
+// view route
+app.get("/view/:id", (req, res) => {
+    let recipe = {};
+
+    currentSelection.forEach(hit => {
+        // find recipe from list
+        if (hit.recipe.uri.split("#")[1] === req.params.id)
+        {
+            recipe = hit.recipe;
+            return true;
+        }
+    });
+
+    res.render("view", {recipe: recipe});
+});
+
+// show POST route
 app.post("/show", (req, res) => {
     let data = parseBody(req.body.fields);
     data.q = data.q.split(",");
@@ -48,6 +67,10 @@ app.post("/show", (req, res) => {
         else
         {
             let data = JSON.parse(response.body);
+
+            // store response for future use
+            currentSelection = data.hits;
+
             res.render("show", {"count": data.count,"recipes": data.hits});
         }
     });

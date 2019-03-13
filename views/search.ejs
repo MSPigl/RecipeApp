@@ -126,7 +126,7 @@
         ingredientButton.click(addIngredient);
 
         let submitButton = $("#submitButton");
-        submitButton.click(() => {
+        submitButton.click((event) => {
             $("#ingredientInput").val(buildQueryString());
         });
 
@@ -155,9 +155,15 @@
          */
         function buildQueryString(string)
         {
-            let ingredients = $(".ingredient").text();
+            let ingredients = [];
+            let nodeList = $(".ingredient");
 
-            return ingredients;
+            for (let i = 0; i < nodeList.length; i++)
+            {
+                ingredients.push(nodeList[i].innerText);
+            }
+
+            return ingredients.toString();
         }
     </script>
 <% include ./partials/footer %>
