@@ -1,7 +1,40 @@
 <% include ./partials/header.ejs %>
     <div class="ui container else">
         <div class="ui main text container segment">
-            <div class="ui huge header"><%= recipe.label %></div>
+            <div class="ui huge header">
+                <%= recipe.label %>
+                <p class="ui sub header">by <a href="<%= recipe.url %>" target="_blank"><%= recipe.source %></a></p>
+            </div>
+
+            <div class="ui segment">
+                <h2 class="ui header">Nutrition</h2>
+                
+                <h4 class="ui header">Health Labels</h4>
+                
+                <ul>
+                    <% recipe.healthLabels.forEach(label => { %>
+                        <li><%= label %></li>
+                    <% }); %>
+                </ul>
+
+                <h4 class="ui header">Diet Labels</h4>
+                
+                <ul>
+                    <% recipe.dietLabels.forEach(label => { %>
+                        <li><%= label %></li>
+                    <% }); %>
+                </ul>
+                
+                <p><strong>Calories: </strong> <%= Math.floor(recipe.calories) %>, serves <%= recipe.yield %></p>
+
+                <h2 class="ui header">Ingredients</h2>
+                <% console.log(recipe.dietLabels); %>
+                <ul>
+                    <% recipe.ingredients.forEach(ingredient => { %>
+                        <li><%= ingredient.text %></li>
+                    <% }); %>
+                </ul>
+            </div>
         </div>
     </div>
 <% include ./partials/footer.ejs %>
