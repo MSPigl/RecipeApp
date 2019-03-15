@@ -15,6 +15,14 @@
     margin-bottom: 20px;
 }
 
+#recipeTitle {
+    text-transform: uppercase;
+}
+
+#recipeImage {
+    transition: linear;
+}
+
 .ui.huge.header {
     text-align: center;
 }

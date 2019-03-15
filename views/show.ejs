@@ -6,16 +6,17 @@
     <div class="ui container">
         <div class="ui centered grid">
             <!--TODO: Add pagination to replace this hardcoded range (use from...to)-->
-            <% for (let i = 0; i < 4; i++) {                %>
+            <% let currentIndex = 0 %>
+            <% for (let i = 0; i < 5; i++) {                %>
                 <div class="row">
-            <%  for (let j = 0; j < 4; j++) { %>
-            <%      let recipe = recipes[j].recipe;                %>
+            <%  for (let j = currentIndex; j < currentIndex + 4; j++) { %>
+            <%      let recipe = recipes[j].recipe; console.log(recipe.label, j);               %>
                     <div class="sixteen wide mobile eight wide tablet four wide computer column">
                         <% let recipeId = recipe.uri.split("#")[1] %>
                         <div class="ui fluid card">
-                            <div class="image">
+                            <a class="ui image" href="/view/<%= recipeId %>" target="_blank">
                                 <img src="<%= recipe.image %>">
-                            </div>
+                            </a>
 
                             <div class="content">
                                 <div class="header">
@@ -46,6 +47,7 @@
                     </div>
             <% } %>
                 </div>
+            <% currentIndex += 4; %>
            <% } %>
         </div>
     </div>

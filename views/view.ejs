@@ -1,9 +1,13 @@
 <% include ./partials/header.ejs %>
     <div class="ui container else">
         <div class="ui main text container segment">
-            <div class="ui huge header">
+            <img  id="recipeImage" class="ui centered medium circular image" src="<%= recipe.image %>">
+
+            <div id="recipeTitle" class="ui huge header">
+                <hr>
                 <%= recipe.label %>
                 <p class="ui sub header">by <a href="<%= recipe.url %>" target="_blank"><%= recipe.source %></a></p>
+                <hr>
             </div>
 
             <div class="ui segment">
@@ -28,7 +32,7 @@
                 <p><strong>Calories: </strong> <%= Math.floor(recipe.calories) %>, serves <%= recipe.yield %></p>
 
                 <h2 class="ui header">Ingredients</h2>
-                <% console.log(recipe.dietLabels); %>
+
                 <ul>
                     <% recipe.ingredients.forEach(ingredient => { %>
                         <li><%= ingredient.text %></li>
