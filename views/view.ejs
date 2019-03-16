@@ -13,7 +13,7 @@
             <div class="ui segment">
                 <h2 class="ui header">Nutrition</h2>
                 
-                <% if (recipe.hasOwnProperty("healthLabels")) { %>
+                <% if (recipe.hasOwnProperty("healthLabels") && recipe.healthLabels.length > 0) { %>
                     <h4 class="ui header">Health Labels</h4>
                     
                     <ul>
@@ -23,7 +23,7 @@
                     </ul>
                 <% } %>
 
-                <% if (recipe.hasOwnProperty("dietLabels")) { %>
+                <% if (recipe.hasOwnProperty("dietLabels") && recipe.dietLabels.length > 0) { %>
                     <h4 class="ui header">Diet Labels</h4>
                     
                     <ul>
@@ -33,7 +33,7 @@
                     </ul>
                 <% } %>
                 
-                <p><strong>Calories: </strong> <%= Math.floor(recipe.calories) %>, serves <%= recipe.yield %></p>
+                <p><strong>Calories: </strong> <%= Math.floor(recipe.calories / recipe.yield) %> per serving, serves <%= recipe.yield %></p>
 
                 <h2 class="ui header">Ingredients</h2>
 

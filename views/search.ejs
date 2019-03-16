@@ -1,4 +1,9 @@
 <% include ./partials/header %>
+    <script type="text/javascript">
+        // hide search link on header
+        $("#searchRecipes").hide();
+    </script>
+
     <div class="ui container else">
         <% if (error) { %>
             <div class="ui negative message">
@@ -14,9 +19,9 @@
             <div class="row">
                 <div class="eight wide column">
                         <form id="searchForm" class="ui form" action="/show" method="POST">
-                            <div class="field">
+                            <div class="required field">
                                 <label for="ingredientInput">Ingredients</label>
-                                <input id="ingredientInput" type="text" name="fields[ingredientInput]" placeholder="chicken, salt, sugar, etc..." required>
+                                <input id="ingredientInput" type="text" name="fields[ingredientInput]" placeholder="One at a time (ex: chicken)" required>
                             </div>
                             
                             <div id="addIngredient" class="positive ui fluid button">Add Ingredient</div>
@@ -27,7 +32,6 @@
                                     <i class="dropdown icon"></i>
                                     <div class="default text">Diet</div>
                                     <div class="menu">
-                                        <div class="item" data-value="none">None</div>
                                         <div class="item" data-value="balanced">Balanced</div>
                                         <div class="item" data-value="high-protein">High-Protein</div>
                                         <div class="item" data-value="high-fiber">High-Fiber</div>
@@ -73,24 +77,24 @@
 
                             <div class="equal width fields">
                                 <div class="field">
-                                    <label for="minCal">Min kcals:</label>
+                                    <label for="minCal">Minimum calories:</label>
                                     <input id="minCal" type="number" name="fields[minCal]">
                                 </div>
                                 
                                 <div class="field">
-                                    <label for="maxCal">Max kcals:</label>
+                                    <label for="maxCal">Maximum calories:</label>
                                     <input id="maxCal" type="number" name="fields[maxCal]">
                                 </div>
                             </div>
 
                             <div class="equal width fields">
                                     <div class="field">
-                                        <label for="minTime">Min time:</label>
+                                        <label for="minTime">Minimum time:</label>
                                         <input id="minTime" type="number" name="fields[minTime]">
                                     </div>
                                     
                                     <div class="field">
-                                        <label for="maxTime">Max time:</label>
+                                        <label for="maxTime">Maximum time:</label>
                                         <input id="maxTime" type="number" name="fields[maxTime]">
                                     </div>
                                 </div>
@@ -164,6 +168,14 @@
             }
 
             return ingredients.toString();
+        }
+
+        function validateForm()
+        {
+            let minCals = $("minCal");
+            let maxCals = $("maxCal");
+            let minTime = $("minTime");
+            let maxTime = $("maxTime");
         }
     </script>
 <% include ./partials/footer %>
