@@ -57,7 +57,7 @@ app.post("/show", (req, res) => {
     let data = parseBody(req.body.fields);
     data.q = data.q.split(",");
     
-    let url = `https://api.edamam.com/search?${querystring.stringify(data)}`;
+    let url = `https://api.edamam.com/search?${querystring.stringify(data)}&from=0&to=12`;
 
     request.get(url, (error, response, body) => {
         if (error || response.statusCode !== 200)

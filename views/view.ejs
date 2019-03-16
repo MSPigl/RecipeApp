@@ -13,21 +13,25 @@
             <div class="ui segment">
                 <h2 class="ui header">Nutrition</h2>
                 
-                <h4 class="ui header">Health Labels</h4>
-                
-                <ul>
-                    <% recipe.healthLabels.forEach(label => { %>
-                        <li><%= label %></li>
-                    <% }); %>
-                </ul>
+                <% if (recipe.hasOwnProperty("healthLabels")) { %>
+                    <h4 class="ui header">Health Labels</h4>
+                    
+                    <ul>
+                        <% recipe.healthLabels.forEach(label => { %>
+                            <li><%= label %></li>
+                        <% }); %>
+                    </ul>
+                <% } %>
 
-                <h4 class="ui header">Diet Labels</h4>
-                
-                <ul>
-                    <% recipe.dietLabels.forEach(label => { %>
-                        <li><%= label %></li>
-                    <% }); %>
-                </ul>
+                <% if (recipe.hasOwnProperty("dietLabels")) { %>
+                    <h4 class="ui header">Diet Labels</h4>
+                    
+                    <ul>
+                        <% recipe.dietLabels.forEach(label => { %>
+                            <li><%= label %></li>
+                        <% }); %>
+                    </ul>
+                <% } %>
                 
                 <p><strong>Calories: </strong> <%= Math.floor(recipe.calories) %>, serves <%= recipe.yield %></p>
 

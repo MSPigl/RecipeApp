@@ -1,16 +1,16 @@
 <% include ./partials/header %>
     <div id="showHeader" class="ui main text container segment">
-        <div class="ui huge header">Recipes (<%= count %> results)</div>
+        <div class="ui huge header">Recipes</div>
     </div>
 
     <div class="ui container">
         <div class="ui centered grid">
-            <!--TODO: Add pagination to replace this hardcoded range (use from...to)-->
             <% let currentIndex = 0 %>
-            <% for (let i = 0; i < 5; i++) {                %>
-                <div class="row">
-            <%  for (let j = currentIndex; j < currentIndex + 4; j++) { %>
-            <%      let recipe = recipes[j].recipe; console.log(recipe.label, j);               %>
+            <% recipes.forEach(element => { %>
+                <% let recipe = element.recipe %>
+                <% if (currentIndex === 0) {%>
+                    <div class="row">
+                <% } %>
                     <div class="sixteen wide mobile eight wide tablet four wide computer column">
                         <% let recipeId = recipe.uri.split("#")[1] %>
                         <div class="ui fluid card">
@@ -45,10 +45,11 @@
                             </div>
                         </div>
                     </div>
-            <% } %>
+            <% if (++currentIndex === 4) { %>
                 </div>
-            <% currentIndex += 4; %>
-           <% } %>
+                <% currentIndex = 0; %>
+            <% } %>
+           <% }); %>
         </div>
     </div>
 <% include ./partials/footer %>
